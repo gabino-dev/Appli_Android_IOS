@@ -15,7 +15,7 @@ Le système repose sur trois composants principaux :
 * **Mécanique de Swipe :** Glissez à droite (OUI) ou à gauche (NON) pour parier sur divers événements (Sport, Crypto, Bourse, Météo, Espace, etc.).
 * **Cotes Dynamiques :** Calcul automatique des cotes et des gains basés sur des probabilités de réussite prédéfinies.
 * **Feedback Visuel :** Animations pop-up centrales et retours haptiques lors de la résolution immédiate du pari.
-* **Synchronisation Matérielle :** Envoi direct du solde (`coins`) au réseau local à chaque mise à jour.
+* **Synchronisation Matérielle :** Envoi direct du solde (`coins`) via réseau wifi (partage de connexion) à chaque mise à jour.
 
 ## 🛠️ Prérequis
 
@@ -27,7 +27,7 @@ Le système repose sur trois composants principaux :
 ## 🚀 Installation & Démarrage
 
 ### 1. Configuration de l'Arduino et du Pont Python
-1. Branchez votre Arduino et téléversez votre code de réception série. **Fermez impérativement le moniteur série de l'IDE Arduino.**
+1. Branchez votre Arduino et téléversez votre code de réception série. **Fermez impérativement le moniteur série de l'IDE Arduino pour pas bloquer le Port COM.**
 2. Ouvrez `bridge.py` et vérifiez que le port COM correspond à votre Arduino :
    ```python
    ARDUINO_PORT = 'COM4' # Modifiez selon votre configuration (ex: /dev/ttyACM0 sur Linux/Mac)
