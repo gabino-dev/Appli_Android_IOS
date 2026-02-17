@@ -79,8 +79,7 @@ class _PolyFakeAppState extends State<PolyFakeApp> {
     super.initState();
     availableParis = List.from(_allParis)..shuffle();
 
-    // --- CORRECTION DU DÉMARRAGE ARDUINO ---
-    // On attend 500ms que l'app se lance bien, puis on force l'envoi de 1000
+ 
     Future.delayed(const Duration(milliseconds: 500), () {
       _sendToArduino(coins);
     });
@@ -100,7 +99,7 @@ class _PolyFakeAppState extends State<PolyFakeApp> {
 
   double getOdd(int percentage) => percentage <= 0 ? 99.0 : (percentage >= 100 ? 1.01 : double.parse((100 / percentage).toStringAsFixed(2)));
 
-  // --- LOGIQUE DE JEU AVEC ANIMATION CENTRALE ---
+  
   void _processBet(int index, bool isOui) {
     HapticFeedback.mediumImpact();
     var currentPari = availableParis[index];
@@ -126,13 +125,11 @@ class _PolyFakeAppState extends State<PolyFakeApp> {
       });
       availableParis.removeAt(index);
 
-      // --- DÉCLENCHEMENT DE L'ANIMATION CENTRALE ---
       _feedbackIsWin = isWin;
       _feedbackAmount = isWin ? profitNet : mise;
       _showFeedback = true;
     });
 
-    // CACHER L'ANIMATION APRÈS 1 SECONDE
     Timer(const Duration(milliseconds: 1000), () {
       if(mounted) setState(() => _showFeedback = false);
     });
@@ -170,7 +167,6 @@ class _PolyFakeAppState extends State<PolyFakeApp> {
     );
   }
 
-  // --- PAGE D'ACCUEIL : LE MIX PARFAIT AVEC ANIMATION CENTRALE ---
   Widget _buildHomePage() {
     return Column(
       children: [
@@ -204,17 +200,16 @@ class _PolyFakeAppState extends State<PolyFakeApp> {
                 },
               ),
 
-              // 2. L'ANIMATION DE RÉSULTAT (OVERLAY)
               IgnorePointer(
-                ignoring: !_showFeedback, // Laisse passer les clics quand invisible
+                ignoring: !_showFeedback, 
                 child: AnimatedOpacity(
                   opacity: _showFeedback ? 1.0 : 0.0,
                   duration: const Duration(milliseconds: 200),
                   child: Container(
-                    color: Colors.black54, // Fond semi-transparent
+                    color: Colors.black54, 
                     child: Center(
                       child: Transform.scale(
-                        scale: _showFeedback ? 1.0 : 0.5, // Effet de pop
+                        scale: _showFeedback ? 1.0 : 0.5, 
                         child: Container(
                           padding: const EdgeInsets.all(30),
                           decoration: BoxDecoration(
@@ -366,9 +361,7 @@ class _PolyFakeAppState extends State<PolyFakeApp> {
   Widget _statItem(String val, String label, Color color) => Column(children: [Text(val, style: TextStyle(color: color, fontSize: 24, fontWeight: FontWeight.bold)), Text(label, style: const TextStyle(color: Colors.white70))]);
 }
 
-// ==========================================================
-// 👑 LA CLASSE TINDER CARD (ANIMATION FLUIDE)
-// ==========================================================
+
 class TinderCard extends StatefulWidget {
   final Widget child;
   final Function(bool isOui) onSwipe;
@@ -505,4 +498,5 @@ class BetDetailScreen extends StatelessWidget {
       ),
     );
   }
+
 }
